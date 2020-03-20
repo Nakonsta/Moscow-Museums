@@ -1,6 +1,6 @@
 <template>
     <div class="museums">
-        <Togglers @showMap="onShowMap" @showTable="onShowTable"/>
+        <Togglers @showMap="onShowMap" @showTable="onShowTable" @showMapAndTable="onShowMapAndTable"/>
         <MuseumsTableBLock v-if="isTableShown" :museums="museums" />
         <MuseumsMap v-if="isMapShown" :museums="museums" />
     </div>
@@ -24,7 +24,8 @@ export default {
         return {
             museums: null,
             isTableShown: true,
-            isMapShown: false
+            isMapShown: false,
+            isMapAndTableShown: false
         }
     },
 
@@ -36,12 +37,19 @@ export default {
 
     methods: {
         onShowMap(data) {
-            this.isTableShown = false;
-            this.isMapShown = true
+            this.isTableShown = false,
+            this.isMapShown = true,
+            this.isMapAndTableShown = false
         },
         onShowTable(data) {
-            this.isTableShown = true;
-            this.isMapShown = false
+            this.isTableShown = true,
+            this.isMapShown = false,
+            this.isMapAndTableShown = false
+        }, 
+        onShowMapAndTable(data) {
+            this.isTableShown = false,
+            this.isMapShown = false,
+            this.isMapAndTableShown = true
         } 
     }
 }

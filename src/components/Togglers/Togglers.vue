@@ -13,6 +13,12 @@
             >
                 Показать на карте
             </button>
+            <button
+                @click="showMapAndTable"
+                class="btn btn-info"
+            >
+                Показать карту с таблицей
+            </button>
         </div>
     </div>
 </template>
@@ -28,6 +34,9 @@ export default {
         },
         showMap() {
             this.$emit('showMap', 'map')
+        },
+        showMapAndTable() {
+            this.$emit('showMapAndTable', 'map-and-table')
         }
     }
 }
