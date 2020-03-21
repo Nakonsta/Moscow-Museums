@@ -1,8 +1,9 @@
 <template>
     <div class="museums">
-        <Togglers @showMap="onShowMap" @showTable="onShowTable"/>
-        <MuseumsTableBLock v-if="isTableShown" :museums="museums" />
-        <MuseumsMap v-if="isMapShown" :museums="museums" />
+        <Togglers @showMap="onShowMap" @showTable="onShowTable" @showMapAndTable="onShowMapAndTable"/>
+        <MuseumsTableBLock v-if="isTableShown" :museumsTableProps="museums" />
+        <MuseumsMap v-if="isMapShown" :museumsMapProps="museums" />
+        <MuseumsMapAndTable v-if="isMapAndTableShown" :museumsMapAndTableProps="museums" />
     </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Togglers from '../Togglers/Togglers.vue';
 import MuseumsTableBLock from '../MuseumsTableBLock/MuseumsTableBLock.vue';
 import MuseumsMap from '../MuseumsMap/MuseumsMap.vue';
+import MuseumsMapAndTable from '../MuseumsMapAndTable/MuseumsMapAndTable.vue';
 
 export default {
     name: 'MuseumsBLock',
@@ -17,14 +19,16 @@ export default {
     components: {
         Togglers,
         MuseumsTableBLock,
-        MuseumsMap
+        MuseumsMap,
+        MuseumsMapAndTable
     },
 
     data() {
         return {
             museums: null,
             isTableShown: true,
-            isMapShown: false
+            isMapShown: false,
+            isMapAndTableShown: false
         }
     },
 
@@ -36,12 +40,19 @@ export default {
 
     methods: {
         onShowMap(data) {
-            this.isTableShown = false;
-            this.isMapShown = true
+            this.isTableShown = false,
+            this.isMapShown = true,
+            this.isMapAndTableShown = false
         },
         onShowTable(data) {
-            this.isTableShown = true;
-            this.isMapShown = false
+            this.isTableShown = true,
+            this.isMapShown = false,
+            this.isMapAndTableShown = false
+        }, 
+        onShowMapAndTable(data) {
+            this.isTableShown = false,
+            this.isMapShown = false,
+            this.isMapAndTableShown = true
         } 
     }
 }

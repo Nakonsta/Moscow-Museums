@@ -6,7 +6,7 @@
             :zoom="12"
         >
             <ymap-marker 
-                v-for="(museum, key) in museums"
+                v-for="(museum, key) in museumsMapProps"
                 v-if="key < 30"
                 :key="key"
                 :coords="museum.geometry.coordinates" 
@@ -31,7 +31,7 @@ export default {
     },
 
     props: {
-        museums: {
+        museumsMapProps: {
             type: Array,
             default: () => []
         }
