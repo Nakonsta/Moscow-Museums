@@ -1,8 +1,9 @@
 <template>
     <div class="museums">
         <Togglers @showMap="onShowMap" @showTable="onShowTable" @showMapAndTable="onShowMapAndTable"/>
-        <MuseumsTableBLock v-if="isTableShown" :museums="museums" />
-        <MuseumsMap v-if="isMapShown" :museums="museums" />
+        <MuseumsTableBLock v-if="isTableShown" :museumsTableProps="museums" />
+        <MuseumsMap v-if="isMapShown" :museumsMapProps="museums" />
+        <MuseumsMapAndTable v-if="isMapAndTableShown" :museumsMapAndTableProps="museums" />
     </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Togglers from '../Togglers/Togglers.vue';
 import MuseumsTableBLock from '../MuseumsTableBLock/MuseumsTableBLock.vue';
 import MuseumsMap from '../MuseumsMap/MuseumsMap.vue';
+import MuseumsMapAndTable from '../MuseumsMapAndTable/MuseumsMapAndTable.vue';
 
 export default {
     name: 'MuseumsBLock',
@@ -17,7 +19,8 @@ export default {
     components: {
         Togglers,
         MuseumsTableBLock,
-        MuseumsMap
+        MuseumsMap,
+        MuseumsMapAndTable
     },
 
     data() {

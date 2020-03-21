@@ -1,7 +1,7 @@
 <template>
     <div class="museums__table-block">
         <Select @input="rerenderTable" :options="options"/>
-        <MuseumsTable :museums="museums" :museumsQuantity="museumsQuantity" />
+        <MuseumsTable :museums="museumsTableProps" :museumsQuantity="museumsQuantity" />
     </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     },
 
     props: {
-        museums: {
+        museumsTableProps: {
             type: Array,
             default: () => []
         }
