@@ -1,5 +1,6 @@
 <template>
     <div class="map-table">
+        <!-- {{museumsMapAndTableProps}} -->
         <!-- <MuseumsTable :museums="museumsMapAndTableProps" :museumsQuantity="30" /> -->
         <div class="museums__table-list"></div>
         <div id="map-addresses"></div>
@@ -56,64 +57,22 @@ export default {
             content: '',
             contentOffset: [0, 0],
             contentLayout: ''
-        },
-        shops: [
-            {
-                coords: [55.72156952053125,37.692989148681654],
-                address: 'Россия, Москва, Волгоградский проспект, 32к12',
-                metro: ['Волгоградский проспект (фиолетовая)', 'Угрешская (МЦК)'],
-                phone: ['+7 (980) 614-84-21', '+7 (495) 518-06-52'],
-                website: 'technopark.ru',
-                time: 'Ежедневно с 09:00 до 21:00'
-            },
-            {
-                coords: [55.744949060949494,37.6509305812288],
-                address: 'Россия, Москва, Тетеринский переулок, 4/8с2',
-                metro: ['Таганская (кольцевая)'],
-                phone: [],
-                website: 'technopark.ru',
-                time: 'Ежедневно с 10:00 до 21:00'
-            },
-            {
-                coords: [55.7361122550456,37.59707975498832],
-                address: 'Россия, Москва, Турчанинов переулок, 3с1',
-                metro: ['Парк культуры (красная)'],
-                phone: ['+7 (495) 518-06-52'],
-                website: 'technopark.ru',
-                time: 'Ежедневно с 09:00 до 20:00'
-            },
-            {
-                coords: [55.72257676155486,37.56339300908131],
-                address: 'Россия, Москва, улица Савельева',
-                metro: ['Спортивная (красная)', 'Лужники (МЦК)'],
-                phone: ['+7 (980) 614-84-21'],
-                website: 'technopark.ru',
-                time: 'Ежедневно с 08:00 до 20:00'
-            },
-            {
-                coords: [55.6953563491502,37.5311784748228],
-                address: 'Россия, Москва, Ломоносовский проспект, 25к2',
-                metro: ['Университет (красная)'],
-                phone: ['+7 (980) 614-84-21', '+7 (495) 518-06-52'],
-                website: 'technopark.ru',
-                time: 'Ежедневно с 11:00 до 18:00'
-            }
-        ]
+        }
     }),
 
     mounted() {
         var addressesMap = new ymaps.Map("map-addresses", {
-                center: this.shops[0].coords,
-                zoom: 15,
-            });
+            center: this.museumsMapAndTableProps[0].geometry.coordinates,
+            zoom: 15,
+        });
 
         var objects = [];
         var addressList = {};
         addressList.box = document.querySelector('.museums__table-list');
         addressList.addAddress = function(address) {
-            for (let i = 0; i < this.shops.length; i++) {
-                if (address == this.shops[i].address) {
-                    var thisShop = this.shops[i];
+            for (let i = 0; i < this.museumsMapAndTableProps.length; i++) {
+                if (address == this.museumsMapAndTableProps[i].properties.description) {
+                    var thisShop = this.museumsMapAndTableProps[i];
                     newItemMetro = thisShop.metro.join(', ');
                 }
             }
@@ -144,9 +103,9 @@ export default {
         };
 
         //добавляем все маркеры на карту
-        this.shops.forEach(function (item) {
-            addressesMap.geoObjects.add(new ymaps.Placemark(item.coords, {
-                balloonContent: item.address,
+        this.museumsMapAndTableProps.forEach(function (item) {
+            addressesMap.geoObjects.add(new ymaps.Placemark(item.geometry.coordinates, {
+                balloonContent: item.properties.description,
             }, {
                 preset: 'islands#icon',
                 iconColor: '#0095b6'
