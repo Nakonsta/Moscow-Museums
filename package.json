@@ -11,7 +11,7 @@
   "dependencies": {
     "vue": "^2.5.3",
     "bootstrap": "^4.0.0-beta.2",
-    "bootstrap-vue": "^1.2.0",
+    "bootstrap-vue": "^2.0.0",
     "popper.js": "^1.12.9"
   },
   "devDependencies": {
